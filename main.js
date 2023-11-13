@@ -6,7 +6,7 @@ class Product {
     }
 }
 
-const product1 = new Product("caño de cobre", 4000, 10)
+const product1 = new Product("caño de cobre", 5000, 10)
 const product2 = new Product("mensula", 6000, 16)
 const product3 = new Product("Manguera Cristal", 300, 6)
 
@@ -47,23 +47,23 @@ while (ejecucionWhile == true) {
                     let producto = parseInt(prompt("Elija el Producto a Comprar...(1)Caño de cobre , (2)Mensulas , (3)Manguera Cristal "))
 
                     if (producto == 1) {
-                        let cantidad = parseInt(prompt("El precio de Caño de cobre es $ 4000 el Metro ....Ingrese la Cantidad de Metros "))
+                        let cantidad = parseInt(prompt("El precio de "+product1.title+ " es " + product1.price +" el Metro ....Ingrese la Cantidad de Metros "))
                         let totalcaño = cantidad * product1.price
-                        alert ("precio a Pagar "+cantidad+" metro de caño =  "+ totalcaño);
+                        alert ("precio a Pagar "+cantidad+" metro de "+product1.title+ " =  "+ totalcaño);
                         const itemticket1 = new Itemticket(product1.title , cantidad, product1.price, totalcaño)
                         ticket.push(itemticket1)
                     }
                     else if (producto == 2) {
-                        let cantidad = parseInt(prompt("El precio de Mensula es de $ 6000 el par....Ingrese la Cantidad de pares a Necesitar "))
+                        let cantidad = parseInt(prompt("El precio de "+product2.title+ " es de " + product2.price +" el par....Ingrese la Cantidad de pares a Necesitar "))
                         let totalmensula = cantidad * product2.price
-                        alert ("precio a Pagar "+cantidad+" par de mensulas = "+ totalmensula);
+                        alert ("precio a Pagar "+cantidad+" par de "+product2.title+ " = "+ totalmensula);
                         const itemticket2 = new Itemticket(product2.title , cantidad, product2.price, totalmensula)
                         ticket.push(itemticket2)
                     }
                     else if (producto == 3) {
-                        let cantidad = parseInt(prompt("El precio de Manguera Cristal es de $ 300 el Metro....Ingrese la Cantidad de pares a Necesitar "))
+                        let cantidad = parseInt(prompt("El precio de "+product3.title+ " es de " + product3.price +" el Metro....Ingrese la Cantidad de pares a Necesitar "))
                         let totalmanguera = cantidad * product3.price
-                        alert ("precio a Pagar "+cantidad+" metro de manguera ="+ totalmanguera);
+                        alert ("precio a Pagar "+cantidad+" metro de "+product3.title+ " ="+ totalmanguera);
                         const itemticket3 = new Itemticket(product3.title , cantidad, product3.price, totalmanguera)
                         ticket.push(itemticket3)
                     }
@@ -76,9 +76,11 @@ while (ejecucionWhile == true) {
 
                     if (validarRta(rta, "no") == true) {
                         sigue = "no"
+
+                        alert ("Muchas Gracias Por Confiar en NicoRefrigeracion .....recibira su orden de Compra por Consola")
                         
                         console.log(fechaActual)
-                        const itemsticket = ticket.map(Itemticket1 => ({ producto: Itemticket1.title , cantidad: Itemticket1.amount, precio: Itemticket1.price, total: Itemticket1.total}))
+                        const itemsticket = ticket.map(Itemticket1 => ({ producto: Itemticket1.title , precio: Itemticket1.price, cantidad: Itemticket1.amount, total: Itemticket1.total}))
                         
                         console.table(itemsticket)
 
