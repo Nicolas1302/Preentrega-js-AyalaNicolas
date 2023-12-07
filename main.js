@@ -1,11 +1,5 @@
 
-
-
-const productos = [
-    {id: 1, img:"img/img2.jpg" ,nombre:"caño de cobre",category:"caños" ,precio: 5000},
-    {id: 2,img:"img/img3.webp" , nombre: "mensula",category:"mensulas" , precio: 6000},
-    {id: 3, img:"img/img1.webp",nombre: "Manguera Cristal",category:"manguras" , precio: 300}
-]
+// console.log(productos)
 
 let cartProducts
 let cartProductsLS = localStorage.getItem("cartProducts")
@@ -14,19 +8,17 @@ if(cartProductsLS) {
 } else {
     cartProducts = []
 }
-
 let addButton = document.querySelectorAll(".productoAgregar")
-let productsContainer = document.getElementById("products-container")
+// let productsContainer = document.getElementById("products-container")
 
 let contenedor = document.getElementById("item-products")
 for (const producto of productos) {
     let contenedor1 = document.createElement("div")
     contenedor1.innerHTML = /*`<span>ID: ${producto.id}</span>*/
                             `<img src="${producto.img}" alt="">
-                            <h3>Producto: ${producto.nombre}</h3>
-                            <h3>categoria:${producto.category}</h3>
-                            <h4>Precio: $${producto.precio}</h4>
-                            <button class="productoAgregar" id="${producto.id}">Agregar</button>`
+                            <h3>${producto.nombre}</h3>
+                            <h4>$${producto.precio}</h4>
+                            <button class="productoAgregar btn btn-secondary" id="${producto.id}">Agregar</button>`
     contenedor.appendChild(contenedor1)
     addToCartButton ()
 }
@@ -37,12 +29,104 @@ function addToCartButton () {
     addButton.forEach(button => {
         button.onclick = (e) => {
             const productId = e.currentTarget.id
+            console.log(productId)
             const selectedProduct = productos.find(producto => producto.id == productId)
-
+            console.log(selectedProduct)
             cartProducts.push(selectedProduct)
+
+            const repeat = cartProducts.some((repeatProduct) => repeatProduct.id === productId)
+
+            if (repeat){
+                cartProducts.map((prod) => {
+                    if (prod.id === productId){         /* mirar esta parte para manejar la cantidad */
+                        prod.amount;
+                    }
+                })
+            }else {
+                cartProducts
+            }
+            
+            // localStorage.setItem("cartProducts", JSON.stringify(cartProducts))
             console.log(cartProducts)
 
-            localStorage.setItem("cartProducts", JSON.stringify(cartProducts))
+             
+           
         }
     })
 }
+
+/*
+
+
+let elementosLS = []
+elementosLS = cartStorage
+
+console.log(elementosLS)
+
+let cartContainer = document.getElementById("itemListProduc-section")
+
+function renderCarrito (cartItems) {
+    cartItems.forEach(producto => {
+        const cart = document.createElement("div")
+        cart.innerHTML = `  <section class="Items-Cart">
+                            <img src="${producto.img}" alt="">
+                            <h3>${producto.nombre}</h3>
+                            <h2>$${producto.precio}</h2>
+                            <h2>Cantidad:${producto.amount}</h2>
+                            <button class="productoEliminar" id="${producto.id}">Eliminar</button>
+                            </section>`                   
+        cartContainer.appendChild(cart)
+        
+    })
+    EventosEliminar()
+}
+renderCarrito(cartStorage)
+
+
+
+
+
+
+
+function EventosEliminar() {
+    let botonelim = document.querySelectorAll(".productoEliminar");
+    botonelim.forEach(addButton => {
+        addButton.addEventListener('click', function () {
+            console.log(addButton)
+            deleteCartButton ([addButton])
+
+        });
+    });
+}  
+
+
+
+function deleteCartButton (addButton) {
+    let cartProducts1 = []
+    cartProducts1 = cartStorage
+    addButton.forEach(button => {
+        const productId = button.id
+        const selectedProduct = cartProducts1.find(producto => producto.id == productId)
+        console.log(selectedProduct)
+        cartProducts1.splice(selectedProduct,1)
+        localStorage.setItem("cartProducts", JSON.stringify(cartProducts1))
+        console.log(button.id)
+        removeItemCart(productId)
+    })
+    
+}
+
+
+
+function removeItemCart(idProduct){
+    const itemCart = document.querySelectorAll(".Items-Cart")
+    itemCart.forEach(section => {
+        const idNumeroBuscado = section.querySelector(`.productoEliminar[id="${idProduct}"]`)
+        if(idNumeroBuscado){
+            section.remove()
+        }
+    })
+}
+
+*/
+

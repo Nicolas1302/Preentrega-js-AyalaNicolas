@@ -15,7 +15,7 @@
 }
 
 #item-products div{
-    border: solid 3px black;
+    border: solid 1px black;
     width: 15%;
 	margin-left: 3%;
 	margin-bottom: 25px;
@@ -27,6 +27,11 @@
 	align-items: center;
 	align-self: flex-start;
 }
+
+.productoAgregar {
+    width: 100%;
+}
+
 
 #item-products div h3{
     line-height: 5px;
@@ -49,7 +54,7 @@
     align-items: center;
 }
 
-#itemListProduc-section div{
+#itemListProduc-section div .Items-Cart{
     border: solid 3px black;
     width: 70%;
     margin-top: 30px;
@@ -79,4 +84,68 @@
         line-height: 30px;
         font-size: 12px;
     }
+}
+
+.modal-container {
+    width:80%;
+    margin: 0 10%;
+    max-height: 88vh;
+    color: azure;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    overflow: auto;
+    z-index: 9;
+    top: 12vh;
+    scrollbar-color: none;
+}
+
+.modal-container::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-header{
+    display: flex;
+    justify-content: space-around;
+    background-color: black;
+    color: aliceblue;
+    width: 100%;
+}
+
+.modal-header-title {
+    justify-self: start;
+}
+
+.modal-header-button {
+    cursor: pointer;
+    margin: 20px;
+    font-size: 40px;
+}
+
+.modal-container > .modal-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: 10px;
+}
+
+.modal-container > div > img {
+    height: 120px;
+    width: 120px;
+
+}
+
+.total-content {
+    font-size: 25px;
+    padding: 20px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.delete-product {
+    cursor: pointer;
 }
