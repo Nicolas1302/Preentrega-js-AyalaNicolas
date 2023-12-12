@@ -1,5 +1,6 @@
 const verCarrito = document.getElementById("verCarrito")
 const modalContainer = document.getElementById("modal-container")
+let cantidadProductos = document.getElementById("cantidadProducto")
 
 
 
@@ -30,7 +31,8 @@ const mostrarCarrito = () => {
                             <img src="${products.img}" alt="">
                             <h3>${products.nombre}</h3>
                             <p>${products.precio}$</p>
-                            <p>cantidad: ${products.amount}</p>`;
+                            <p>cantidad:${products.cantidad}</p>
+                            <p>total:${products.cantidad*products.precio}</p>`;
         modalContainer.append(carritoConten);
 
         let eliminar = document.createElement("spam");  /*creo el boton de eliminar */
@@ -42,7 +44,7 @@ const mostrarCarrito = () => {
 
     })
 
-    const total = cartProducts.reduce((acc , el) => acc + el.precio, 0);
+    const total = cartProducts.reduce((acc , el) => acc + el.precio * el.cantidad, 0); /*el reduce acumula o suma el total de los productos del carrito */
 
     const totalCarrito = document.createElement("div");
     totalCarrito.className = "total-content";
@@ -61,5 +63,12 @@ const eliminarProducto = () => {                            /*Buscamos la Id par
         return cartProductsId !== foundId;    /*filtramo y retorna los ID que son diferente al encontrado */
     });
 
+    carritoContador()
     mostrarCarrito(); /*mostramos el Carrito sin el elemento eliminado */
 };
+
+const carritoContador = () => {
+    cantidadProductos.style.display = "block";
+    cantidadProductos.innerText = cartProducts.length
+
+}

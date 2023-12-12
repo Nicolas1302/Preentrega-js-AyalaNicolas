@@ -1,29 +1,60 @@
 
-// console.log(productos)
 
-let cartProducts
-let cartProductsLS = localStorage.getItem("cartProducts")
-if(cartProductsLS) {
-    cartProducts = JSON.parse(cartProductsLS)
-} else {
-    cartProducts = []
-}
-let addButton = document.querySelectorAll(".productoAgregar")
-// let productsContainer = document.getElementById("products-container")
+let cartProducts = []
+
 
 let contenedor = document.getElementById("item-products")
-for (const producto of productos) {
-    let contenedor1 = document.createElement("div")
+productos.forEach((producto) => {
+    let contenedor1 = document.createElement("div") /* creo el Div que Contiene el Producto */
+    contenedor1.className = "cartProductos" /* le agrego una clase para dar estilo */
     contenedor1.innerHTML = /*`<span>ID: ${producto.id}</span>*/
                             `<img src="${producto.img}" alt="">
                             <h3>${producto.nombre}</h3>
-                            <h4>$${producto.precio}</h4>
-                            <button class="productoAgregar btn btn-secondary" id="${producto.id}">Agregar</button>`
-    contenedor.appendChild(contenedor1)
-    addToCartButton ()
-}
+                            <h4>$${producto.precio}</h4>`
+    contenedor.append(contenedor1) /* inserto el producto en el DOM */
+
+    
+    let addButton = document.createElement("button") /* creo el Boton agregar */
+    addButton.innerText = "Agregar";
+    addButton.className = "productoAgregar btn btn-secondary"
+
+    contenedor1.append(addButton)  /* inserto el boton en el producto */
+
+    
+
+    addButton.addEventListener("click",() => {
+
+        const repeat = cartProducts.some((repeatProduct) => repeatProduct.id === producto.id)
+
+        console.log(repeat)
+
+        if (repeat){
+            cartProducts.map((prod) => {
+                if (prod.id === producto.id){          
+                    prod.cantidad++;
+                }
+            })
+        }else {
+            cartProducts.push({
+                id: producto.id,
+                img: producto.img,
+                nombre: producto.nombre,
+                precio: producto.precio,
+                cantidad: producto.amount,
+            })
+        }
+        
+        
+        console.log(cartProducts)
+        carritoContador()
+
+    })
 
 
+    // addToCartButton ()
+})
+
+/*
 function addToCartButton () {
     addButton = document.querySelectorAll(".productoAgregar")
     addButton.forEach(button => {
@@ -34,12 +65,14 @@ function addToCartButton () {
             console.log(selectedProduct)
             cartProducts.push(selectedProduct)
 
-            const repeat = cartProducts.some((repeatProduct) => repeatProduct.id === productId)
+            const repeat = cartProducts.some(repeatProduct => repeatProduct.id === productId)
+
+            console.log(repeat)
 
             if (repeat){
                 cartProducts.map((prod) => {
-                    if (prod.id === productId){         /* mirar esta parte para manejar la cantidad */
-                        prod.amount;
+                    if (prod.id === productId){          
+                        prod.amount++;
                     }
                 })
             }else {
@@ -54,6 +87,9 @@ function addToCartButton () {
         }
     })
 }
+
+
+*/
 
 /*
 
