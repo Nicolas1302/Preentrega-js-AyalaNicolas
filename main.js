@@ -1,6 +1,6 @@
 
 
-let cartProducts = []
+let cartProducts = JSON.parse(localStorage.getItem("Cart")) || []; /*para cuando refrescamo la pagina en el carrito muestre lo que hay en el localStorage y si no tiene nada muestra un array vacio */
 
 
 let contenedor = document.getElementById("item-products")
@@ -22,7 +22,7 @@ productos.forEach((producto) => {
 
     
 
-    addButton.addEventListener("click",() => {
+    addButton.addEventListener("click",() => {  /*con este evento hace que si el producto ya fue agregado , le aumenta la cantidad */
 
         const repeat = cartProducts.some((repeatProduct) => repeatProduct.id === producto.id)
 
@@ -46,123 +46,16 @@ productos.forEach((producto) => {
         
         
         console.log(cartProducts)
-        carritoContador()
+        carritoContador() /*actualizo la cantidad en el icono*/
+        saveLS() /*actualizo el localStorage */
+        
 
     })
-
-
-    // addToCartButton ()
 })
 
-/*
-function addToCartButton () {
-    addButton = document.querySelectorAll(".productoAgregar")
-    addButton.forEach(button => {
-        button.onclick = (e) => {
-            const productId = e.currentTarget.id
-            console.log(productId)
-            const selectedProduct = productos.find(producto => producto.id == productId)
-            console.log(selectedProduct)
-            cartProducts.push(selectedProduct)
-
-            const repeat = cartProducts.some(repeatProduct => repeatProduct.id === productId)
-
-            console.log(repeat)
-
-            if (repeat){
-                cartProducts.map((prod) => {
-                    if (prod.id === productId){          
-                        prod.amount++;
-                    }
-                })
-            }else {
-                cartProducts
-            }
-            
-            // localStorage.setItem("cartProducts", JSON.stringify(cartProducts))
-            console.log(cartProducts)
-
-             
-           
-        }
-    })
+/*fUNCION PARA AGREGAR AL LOCAL STOREGE*/
+const saveLS = () => {
+    localStorage.setItem("Cart",JSON.stringify(cartProducts));
 }
 
-
-*/
-
-/*
-
-
-let elementosLS = []
-elementosLS = cartStorage
-
-console.log(elementosLS)
-
-let cartContainer = document.getElementById("itemListProduc-section")
-
-function renderCarrito (cartItems) {
-    cartItems.forEach(producto => {
-        const cart = document.createElement("div")
-        cart.innerHTML = `  <section class="Items-Cart">
-                            <img src="${producto.img}" alt="">
-                            <h3>${producto.nombre}</h3>
-                            <h2>$${producto.precio}</h2>
-                            <h2>Cantidad:${producto.amount}</h2>
-                            <button class="productoEliminar" id="${producto.id}">Eliminar</button>
-                            </section>`                   
-        cartContainer.appendChild(cart)
-        
-    })
-    EventosEliminar()
-}
-renderCarrito(cartStorage)
-
-
-
-
-
-
-
-function EventosEliminar() {
-    let botonelim = document.querySelectorAll(".productoEliminar");
-    botonelim.forEach(addButton => {
-        addButton.addEventListener('click', function () {
-            console.log(addButton)
-            deleteCartButton ([addButton])
-
-        });
-    });
-}  
-
-
-
-function deleteCartButton (addButton) {
-    let cartProducts1 = []
-    cartProducts1 = cartStorage
-    addButton.forEach(button => {
-        const productId = button.id
-        const selectedProduct = cartProducts1.find(producto => producto.id == productId)
-        console.log(selectedProduct)
-        cartProducts1.splice(selectedProduct,1)
-        localStorage.setItem("cartProducts", JSON.stringify(cartProducts1))
-        console.log(button.id)
-        removeItemCart(productId)
-    })
-    
-}
-
-
-
-function removeItemCart(idProduct){
-    const itemCart = document.querySelectorAll(".Items-Cart")
-    itemCart.forEach(section => {
-        const idNumeroBuscado = section.querySelector(`.productoEliminar[id="${idProduct}"]`)
-        if(idNumeroBuscado){
-            section.remove()
-        }
-    })
-}
-
-*/
 

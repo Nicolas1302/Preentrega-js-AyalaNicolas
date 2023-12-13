@@ -4,9 +4,9 @@ let cantidadProductos = document.getElementById("cantidadProducto")
 
 
 
-const mostrarCarrito = () => {
-    modalContainer.innerHTML = ""             /*limpio el carrito */
-    modalContainer.style.display = "flex";    /*le doy un display para que se vea */
+const mostrarCarrito = () => {                  /*se crea el carrito */
+    modalContainer.innerHTML = ""               /*limpio el carrito */
+    modalContainer.style.display = "flex";       /*le doy un display para que se vea */
     const modalHeader = document.createElement("div")
     modalHeader.className = "modal-header"
     modalHeader.innerHTML = `
@@ -31,9 +31,33 @@ const mostrarCarrito = () => {
                             <img src="${products.img}" alt="">
                             <h3>${products.nombre}</h3>
                             <p>${products.precio}$</p>
+                            <span class="restar">➖</span>
                             <p>cantidad:${products.cantidad}</p>
+                            <span class="sumar">➕</span>
                             <p>total:${products.cantidad*products.precio}</p>`;
         modalContainer.append(carritoConten);
+
+        /*restar la cantidad en el carrito */
+        let restar = carritoConten.querySelector(".restar")
+        restar.addEventListener("click", () => {
+            if(products.cantidad != 1){
+                products.cantidad--;
+            }
+            saveLS() /*actualizo el localStorage */
+            mostrarCarrito() /*actualizo el Carrito */
+        })
+
+        /*sumar la cantidad en el carrito */
+        let sumar = carritoConten.querySelector(".sumar")
+        sumar.addEventListener("click", () => {
+            if(products.cantidad >= 1){
+                products.cantidad++;
+            }
+            saveLS()/*actualizo el localStorage */
+            mostrarCarrito()  /*actualizo el Carrito */
+        })
+
+
 
         let eliminar = document.createElement("spam");  /*creo el boton de eliminar */
         eliminar.innerHTML = "❌";
@@ -64,11 +88,16 @@ const eliminarProducto = () => {                            /*Buscamos la Id par
     });
 
     carritoContador()
+    saveLS()
     mostrarCarrito(); /*mostramos el Carrito sin el elemento eliminado */
 };
 
-const carritoContador = () => {
+const carritoContador = () => {     /*Muestra la cantidad de producto en el icono del Carrito */
     cantidadProductos.style.display = "block";
-    cantidadProductos.innerText = cartProducts.length
-
+    const cartLength = cartProducts.length;
+    localStorage.setItem("cartLength", JSON.stringify(cartLength))
+    cantidadProductos.innerText = JSON.parse(localStorage.getItem("cartLength"));
 }
+
+carritoContador() /*Muestra la cantidad de producto en el icono del Carrito cuando se actualiza la pagina */
+
