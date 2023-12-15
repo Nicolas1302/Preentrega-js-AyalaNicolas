@@ -30,10 +30,10 @@ const mostrarCarrito = () => {                  /*se crea el carrito */
         carritoConten.innerHTML =`
                             <img src="${products.img}" alt="">
                             <h3>${products.nombre}</h3>
-                            <p>${products.precio}$</p>
-                            <span class="restar">➖</span>
-                            <p>cantidad:${products.cantidad}</p>
-                            <span class="sumar">➕</span>
+                            <p>$${products.precio}</p>
+                            
+                            <p><span class="restar">➖</span>cantidad:<span class="cartCartidad">${products.cantidad}</span><span class="sumar">➕</span></p>
+                            
                             <p>total:${products.cantidad*products.precio}</p>`;
         modalContainer.append(carritoConten);
 
@@ -64,7 +64,18 @@ const mostrarCarrito = () => {                  /*se crea el carrito */
         eliminar.className = "delete-product";
         carritoConten.append(eliminar);
 
-        eliminar.addEventListener("click",eliminarProducto) /*evento que lño elimina */
+        eliminar.addEventListener("click",() => {
+            Toastify({
+                text: "Eliminaste "+[products.nombre]+" del Carrito",
+                duration: 4000,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                style: {
+                    background: "linear-gradient(to right, #457fca, #5691c8)",
+                },
+            }).showToast();
+            eliminarProducto()
+        }) /*evento que lño elimina */
 
     })
 

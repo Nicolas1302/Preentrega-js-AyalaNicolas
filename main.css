@@ -32,6 +32,14 @@
     width: 100%;
 }
 
+.restar {
+    cursor: pointer;
+}
+
+.sumar {
+    cursor: pointer;
+}
+
 
 #item-products div h3{
     line-height-step: 5px;
@@ -132,8 +140,29 @@
     justify-content: space-between;
     color: rgb(138, 137, 137);
     align-items: center;
-    width: 70%;
+    width: 90%;
     margin: 10px;
+    background-color: #acd8f7;
+}
+
+.modal-container > .modal-content h3{
+    font-size: 15px;
+    text-align: center;
+    width: 200px;
+}
+
+.modal-container > .modal-content p{
+    margin-bottom: 0;
+}
+
+.cartCartidad {
+    width: 10px;
+    padding: 6px;
+    text-align: center;
+    background-color: azure;
+    border: solid 1px black;
+    border-radius: 3px;
+
 }
 
 .modal-container > div > img {
