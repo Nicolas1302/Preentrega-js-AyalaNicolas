@@ -4,7 +4,7 @@ let cartProducts = JSON.parse(localStorage.getItem("Cart")) || []; /*para cuando
 let contenedor = document.getElementById("item-products")
 
 
-const getProductos = async () => {
+const getProductos = async () => {      /*la promesa que toma los elemento de data.json*/
     const response = await fetch("data.json");
     const data = await response.json();
 
@@ -53,18 +53,17 @@ const getProductos = async () => {
             }
     
             
-            Toastify({
+            Toastify({                                                  // se crea la notificacion de que agregaste Producto al Carrito
                 text: "Agregaste "+[producto.nombre]+" al Carrito",
                 duration: 4000,
                 gravity: "bottom", // `top` or `bottom`
                 position: "center", // `left`, `center` or `right`
                 style: {
-                    background: "linear-gradient(to top, #000000, #0f9b0f)",
+                    background: "#0f9b0f",
                 },
             }).showToast();
             
             
-            console.log(cartProducts)
             carritoContador() /*actualizo la cantidad en el icono*/
             saveLS() /*actualizo el localStorage */
             

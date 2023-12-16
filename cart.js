@@ -13,7 +13,7 @@ const mostrarCarrito = () => {                  /*se crea el carrito */
         <h1 class="modal-header-title">Carrito</h1>`
     modalContainer.append(modalHeader);
 
-    const modalbuttom = document.createElement("div")
+    const modalbuttom = document.createElement("div") /*se crea el boton para cerrar el carrito */
     modalbuttom.innerText = "x";
     modalbuttom.className = "modal-header-button";
 
@@ -60,7 +60,7 @@ const mostrarCarrito = () => {                  /*se crea el carrito */
 
         let eliminar = carritoConten.querySelector(".delete-product")
         eliminar.addEventListener("click", () => {
-            Toastify({
+            Toastify({                                                  /*se crea la notificacion del evento que elimina elementos del carrito */
                 text: "Eliminaste "+[products.nombre]+" del Carrito",
                 duration: 4000,
                 gravity: "top", // `top` or `bottom`

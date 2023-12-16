@@ -4,7 +4,7 @@
   }
 
 body {
-    background-image: url(img/fondo1.jpg);
+    background-image: url(../img/fondo1.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -103,19 +103,6 @@ a {
     width: 10%;
 }
 
-@media (max-width: 768px) {
-    #item-products{
-        display: block;
-    }
-
-    #item-products div{
-        width: 50%;
-        margin-left: 20%;
-        margin-bottom: 25px;
-        line-height: 30px;
-        font-size: 12px;
-    }
-}
 
 .modal-container {
     width:80%;
