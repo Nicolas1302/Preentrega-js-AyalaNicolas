@@ -59,7 +59,7 @@ const getProductos = async () => {
                 gravity: "bottom", // `top` or `bottom`
                 position: "center", // `left`, `center` or `right`
                 style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    background: "linear-gradient(to top, #000000, #0f9b0f)",
                 },
             }).showToast();
             

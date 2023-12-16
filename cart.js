@@ -34,7 +34,8 @@ const mostrarCarrito = () => {                  /*se crea el carrito */
                             
                             <p><span class="restar">➖</span>cantidad:<span class="cartCartidad">${products.cantidad}</span><span class="sumar">➕</span></p>
                             
-                            <p>total:${products.cantidad*products.precio}</p>`;
+                            <p>total:${products.cantidad*products.precio}</p>
+                            <span class="delete-product">❌</span>`;
         modalContainer.append(carritoConten);
 
         /*restar la cantidad en el carrito */
@@ -57,25 +58,21 @@ const mostrarCarrito = () => {                  /*se crea el carrito */
             mostrarCarrito()  /*actualizo el Carrito */
         })
 
-
-
-        let eliminar = document.createElement("spam");  /*creo el boton de eliminar */
-        eliminar.innerHTML = "❌";
-        eliminar.className = "delete-product";
-        carritoConten.append(eliminar);
-
-        eliminar.addEventListener("click",() => {
+        let eliminar = carritoConten.querySelector(".delete-product")
+        eliminar.addEventListener("click", () => {
             Toastify({
                 text: "Eliminaste "+[products.nombre]+" del Carrito",
                 duration: 4000,
                 gravity: "top", // `top` or `bottom`
-                position: "center", // `left`, `center` or `right`
+                position: "right", // `left`, `center` or `right`
                 style: {
-                    background: "linear-gradient(to right, #457fca, #5691c8)",
+                    background: "linear-gradient(to top, #ee0979, #ff6a00)",
                 },
-            }).showToast();
-            eliminarProducto()
-        }) /*evento que lño elimina */
+            }).showToast()
+            eliminarProducto(products.id);
+        })
+        
+            
 
     })
 
@@ -91,16 +88,18 @@ const mostrarCarrito = () => {                  /*se crea el carrito */
 
 verCarrito.addEventListener("click", mostrarCarrito)  /*evento para Mostrar Carrito */
 
-const eliminarProducto = () => {                            /*Buscamos la Id para eliminar */
-    const foundId  = cartProducts.find((element) => element.id);
+const eliminarProducto = (id) => {                            /*Buscamos la Id para eliminar */
+    const foundId  = cartProducts.find((element) => element.id === id);
+
+    console.log(foundId)
 
     cartProducts = cartProducts.filter((cartProductsId) => {
         return cartProductsId !== foundId;    /*filtramo y retorna los ID que son diferente al encontrado */
     });
-
     carritoContador()
     saveLS()
-    mostrarCarrito(); /*mostramos el Carrito sin el elemento eliminado */
+    mostrarCarrito();
+    /*mostramos el Carrito sin el elemento eliminado */
 };
 
 const carritoContador = () => {     /*Muestra la cantidad de producto en el icono del Carrito */
@@ -109,6 +108,8 @@ const carritoContador = () => {     /*Muestra la cantidad de producto en el icon
     localStorage.setItem("cartLength", JSON.stringify(cartLength))
     cantidadProductos.innerText = JSON.parse(localStorage.getItem("cartLength"));
 }
+
+
 
 carritoContador() /*Muestra la cantidad de producto en el icono del Carrito cuando se actualiza la pagina */
 
